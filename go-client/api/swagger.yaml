@@ -1,0 +1,354 @@
+---
+swagger: "2.0"
+info:
+  description: "This service makes ITU courses even better"
+  version: "1.0.0"
+  title: "ITU courses"
+host: "api.example.com"
+basePath: "/v1"
+schemes:
+- "https"
+paths:
+  /student:
+    get:
+      summary: "Returns a list of students."
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/student"
+    post:
+      summary: "Creates a new student"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - in: "body"
+        name: "addStudent"
+        description: "Creates a new student with id, name and workload"
+        required: true
+        schema:
+          $ref: "#/definitions/student"
+        x-exportParamName: "AddStudent"
+      responses:
+        "200":
+          description: "OK"
+        "405":
+          description: "Invalid input"
+  /student/{studentId}:
+    get:
+      summary: "Return specific student"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "studentId"
+        in: "path"
+        description: "ID of student to return"
+        required: true
+        type: "integer"
+        x-exportParamName: "StudentId"
+      responses:
+        "200":
+          description: "Student found"
+          schema:
+            $ref: "#/definitions/student"
+        "400":
+          description: "Invalid Student ID"
+        "404":
+          description: "Student not found"
+    post:
+      summary: "Updates an existing student"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "studentId"
+        in: "path"
+        description: "Student who needs to be updated"
+        required: true
+        type: "integer"
+        x-exportParamName: "StudentId"
+      - name: "name"
+        in: "formData"
+        description: "To update the students name"
+        required: false
+        type: "string"
+        x-exportParamName: "Name"
+        x-optionalDataType: "String"
+      - name: "workload"
+        in: "formData"
+        description: "To update the students workload"
+        required: false
+        type: "integer"
+        x-exportParamName: "Workload"
+        x-optionalDataType: "Int32"
+      responses:
+        "400":
+          description: "Invalid Student ID"
+        "404":
+          description: "Student not found"
+  /course:
+    get:
+      summary: "Returns a list of users."
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/course"
+    post:
+      summary: "Creates a new course"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - in: "body"
+        name: "addCourse"
+        description: "Creates a new course with courseid, coursename and courseteacher"
+        required: true
+        schema:
+          $ref: "#/definitions/course"
+        x-exportParamName: "AddCourse"
+      responses:
+        "200":
+          description: "OK"
+        "405":
+          description: "Invalid input"
+  /course/{courseId}:
+    get:
+      summary: "Return specific course"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "courseId"
+        in: "path"
+        description: "ID of course to return"
+        required: true
+        type: "integer"
+        x-exportParamName: "CourseId"
+      responses:
+        "200":
+          description: "Course found"
+          schema:
+            $ref: "#/definitions/course"
+        "400":
+          description: "Invalid course ID"
+        "404":
+          description: "Course not found"
+    post:
+      summary: "Updates an existing course"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "courseId"
+        in: "path"
+        description: "Course that needs to be updated"
+        required: true
+        type: "integer"
+        x-exportParamName: "CourseId"
+      - name: "name"
+        in: "formData"
+        description: "To update the course name"
+        required: false
+        type: "string"
+        x-exportParamName: "Name"
+        x-optionalDataType: "String"
+      - name: "teacher"
+        in: "formData"
+        description: "To update the course teacher"
+        required: false
+        type: "integer"
+        x-exportParamName: "Teacher"
+        x-optionalDataType: "Int32"
+      - name: "studentSatisfactionRating"
+        in: "formData"
+        description: "To update the course Satisfaction Rating"
+        required: false
+        type: "integer"
+        x-exportParamName: "StudentSatisfactionRating"
+        x-optionalDataType: "Int32"
+      responses:
+        "400":
+          description: "Invalid Course ID"
+        "404":
+          description: "Course not found"
+    delete:
+      summary: "Delete specific course"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "courseId"
+        in: "path"
+        description: "Course ID to delete"
+        required: true
+        type: "integer"
+        x-exportParamName: "CourseId"
+      responses:
+        "400":
+          description: "Invalid course ID"
+        "404":
+          description: "Course not found"
+  /teacher:
+    get:
+      summary: "Returns a list of users."
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/teacher"
+    post:
+      summary: "Creates a new teacher"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - in: "body"
+        name: "addTeacher"
+        description: "Creates a new teacher with teacherid and teacherename"
+        required: true
+        schema:
+          $ref: "#/definitions/teacher"
+        x-exportParamName: "AddTeacher"
+      responses:
+        "200":
+          description: "OK"
+        "405":
+          description: "Invalid input"
+  /teacher/{teacherId}:
+    get:
+      summary: "Return specific teacher"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "teacherId"
+        in: "path"
+        description: "ID of teacher to return"
+        required: true
+        type: "integer"
+        x-exportParamName: "TeacherId"
+      responses:
+        "200":
+          description: "Teacher found"
+          schema:
+            $ref: "#/definitions/teacher"
+        "400":
+          description: "Invalid Teacher ID"
+        "404":
+          description: "Teacher not found"
+    post:
+      summary: "Updates an existing teacher"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - name: "teacherId"
+        in: "path"
+        description: "Teacher who needs to be updated"
+        required: true
+        type: "integer"
+        x-exportParamName: "TeacherId"
+      - name: "name"
+        in: "formData"
+        description: "To update the teachers name"
+        required: false
+        type: "string"
+        x-exportParamName: "Name"
+        x-optionalDataType: "String"
+      - name: "popularityScore"
+        in: "formData"
+        description: "To update the teacher Popularity Score"
+        required: false
+        type: "integer"
+        x-exportParamName: "PopularityScore"
+        x-optionalDataType: "Int32"
+      responses:
+        "400":
+          description: "Invalid Teacher ID"
+        "404":
+          description: "Teacher not found"
+definitions:
+  student:
+    required:
+    - "id"
+    - "name"
+    properties:
+      id:
+        type: "integer"
+      name:
+        type: "string"
+      workload:
+        type: "integer"
+    example:
+      name: "name"
+      workload: 6
+      id: 0
+  course:
+    required:
+    - "id"
+    - "name"
+    - "teacher"
+    properties:
+      id:
+        type: "integer"
+      name:
+        type: "string"
+      teacher:
+        type: "integer"
+      studentSatisfactionRating:
+        type: "integer"
+    example:
+      teacher: 6
+      studentSatisfactionRating: 1
+      name: "name"
+      id: 0
+  teacher:
+    required:
+    - "id"
+    - "name"
+    properties:
+      id:
+        type: "integer"
+      name:
+        type: "string"
+      studentPopularityScore:
+        type: "integer"
+    example:
+      name: "name"
+      id: 0
+      studentPopularityScore: 6
