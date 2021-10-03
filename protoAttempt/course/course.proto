@@ -1,0 +1,25 @@
+syntax = "proto3";
+package tutorial;
+
+//import "google/protobuf/timestamp.proto";
+
+option go_package = "https://github.com/JeppeKorgaard98/mAssignment1/tree/ProtoAttempt/protoAttempt";
+
+message Course {
+    int32 Id = 1;
+    string Name = 2;
+    int32 Teacher = 3;
+    int32 StudentSatisfactionRating = 4;
+}
+
+message Courses {
+    repeated Course courseList = 1;
+}
+
+message courseId {
+    int32 input = 1;
+}
+
+service getCourses {
+    rpc GetCourseList(courseId) returns (Courses) {}
+}
