@@ -31,7 +31,6 @@ var courses = []Course{
 
 func (s *server) GetCourseList(ctx context.Context, in *course.GetCourseListRequest) (*course.GetCourseListReply, error) {
 	//implement actual logic of getting the courses
-	//log.Printf("The server received: %v", courses[in.GetCourseId()].Name)
 	var coursesReply = []*course.Course{
 		{Id: 1, Name: "BDSA", Teacher: 111, StudentSatisfactionRating: 5},
 		{Id: 2, Name: "IDBS", Teacher: 222, StudentSatisfactionRating: 2},
