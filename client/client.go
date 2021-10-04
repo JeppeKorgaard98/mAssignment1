@@ -4,7 +4,7 @@ import (
 	"context"
 	"log"
 
-	"mAssignment1/course" ///Users/Freja/Documents/Programmering/3.semester/disys/Mandatory1/mAssignment1
+	"mAssignment1/course"
 
 	"google.golang.org/grpc"
 )
@@ -24,4 +24,5 @@ func main() {
 	}
 
 	log.Printf("The response from server with list of courses is: %s", response.GetMessage())
+	log.Println(response.GetCourses())
 }

@@ -5,7 +5,7 @@ import (
 	"log"
 	"net"
 
-	"mAssignment1/course" ///Users/Freja/Documents/Programmering/3.semester/disys/Mandatory1/mAssignment1
+	"mAssignment1/course"
 
 	"google.golang.org/grpc"
 )
@@ -22,9 +22,22 @@ type Course struct {
 	StudentSatisfactionRating int32  `json:"studentSatisfactionRating,omitempty"`
 }
 
+//dummy data
+var courses = []Course{
+	{Id: 1, Name: "BDSA", Teacher: 111, StudentSatisfactionRating: 5},
+	{Id: 2, Name: "IDBS", Teacher: 222, StudentSatisfactionRating: 2},
+	{Id: 3, Name: "DSYS", Teacher: 333, StudentSatisfactionRating: 0},
+}
+
 func (s *server) GetCourseList(ctx context.Context, in *course.GetCourseListRequest) (*course.GetCourseListReply, error) {
 	//implement actual logic of getting the courses
-	return &course.GetCourseListReply{Message: "Here goes the list of courses ;)"}, nil //.HelloReply{Message: fmt.Sprint(courses[num].Name) + ";" + fmt.Sprint(courses[num].StudentSatisfactionRating)}, nil
+	//log.Printf("The server received: %v", courses[in.GetCourseId()].Name)
+	var coursesReply = []*course.Course{
+		{Id: 1, Name: "BDSA", Teacher: 111, StudentSatisfactionRating: 5},
+		{Id: 2, Name: "IDBS", Teacher: 222, StudentSatisfactionRating: 2},
+		{Id: 3, Name: "DSYS", Teacher: 333, StudentSatisfactionRating: 0},
+	}
+	return &course.GetCourseListReply{Message: "Here goes the list of courses ;)", Courses: coursesReply}, nil //.HelloReply{Message: fmt.Sprint(courses[num].Name) + ";" + fmt.Sprint(courses[num].StudentSatisfactionRating)}, nil
 }
 
 func main() {

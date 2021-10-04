@@ -5,6 +5,8 @@ option go_package = "github.com/JeppeKorgaard98/mAssignment1;course";
 
 service Courses {
     rpc GetCourseList (GetCourseListRequest) returns (GetCourseListReply) {}
+
+    //rpc GetSingleCourse (GetSingleCourseRequest) returns (GetSingleCourseReply) {}
 }
 
 //defines what we can send along with the request 
@@ -15,4 +17,22 @@ message GetCourseListRequest {}
 message GetCourseListReply {
     string message = 1;
     //could potentially define an id or rating that we also want to receive
+    repeated Course courses = 2;
 }
+
+message Course {
+    int32 Id = 1;
+    string Name = 2;
+    int32 Teacher = 3;
+    int32 StudentSatisfactionRating = 4;
+}
+
+/*message GetSingleCourseRequest {
+    int32 courseId = 1;
+}
+
+message GetSingleCourseReply {
+    string message = 1;
+    //string courseName = 2;
+    //string courseRating = 3;
+}*/
